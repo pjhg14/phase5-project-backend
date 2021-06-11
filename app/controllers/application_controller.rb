@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::API
 
+    def generate_token(payload)
+        JWT.encode(payload, "secret")
+    end
+
     def logged_in?
         begin
             token = request.headers["Authorization"].split(" ")[1]
@@ -15,8 +19,6 @@ class ApplicationController < ActionController::API
         end
     end
 
-    def generate_token(payload)
-        JWT.encode(payload, "secret")
-    end
+    
     
 end

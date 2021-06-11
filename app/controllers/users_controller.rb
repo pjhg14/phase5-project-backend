@@ -7,6 +7,20 @@ class UsersController < ApplicationController
         render json: users
     end
 
+    def login
+        user = user.find_by(username: params[:username])
+
+        if !!user
+            render json: user
+        else
+            render json: {error: "Unable to login", details: user.errors.full_messages}
+        end
+    end
+
+    def dashboard
+        
+    end
+
     def show
         user = User.find(params[:id])
 
