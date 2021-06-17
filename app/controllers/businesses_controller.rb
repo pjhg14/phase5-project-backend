@@ -9,7 +9,7 @@ class BusinessesController < ApplicationController
     def show
         buisness = Business.find(params[:id])
 
-        render json: business
+        render json: buisness
     end
 
     def create

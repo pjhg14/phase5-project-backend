@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   resources :conversations, only: [:index, :show, :create, :update, :destroy]
 
 
-  post "/user/login", to: "users#login"
-  get "/user/dashboard", to: "users#dashboard"
+  post "/users/login", to: "users#login"
+  get "/users/dashboard", to: "users#dashboard"
 end
