@@ -16,7 +16,4 @@ class ApplicationController < ActionController::API
 
         render json: {error: "Please login to access user data"} unless @user
     end
-
-    
-    
 end

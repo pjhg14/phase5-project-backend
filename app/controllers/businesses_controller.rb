@@ -1,7 +1,8 @@
 class BusinessesController < ApplicationController
 
     def index # refactor later to only show all buisnesses related to currently logged in user
-        businesses = Business.all
+        # businesses = Business.all
+        businesses = Business.includes(:applications).all
 
         render json: businesses
     end

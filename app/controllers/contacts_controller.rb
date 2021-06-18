@@ -1,6 +1,7 @@
 class ContactsController < ApplicationController
     def index
-        contacts = Contact.all
+        # contacts = Contact.all
+        contacts = Contact.includes(:application).all
 
         render json: contacts
     end
@@ -41,6 +42,6 @@ class ContactsController < ApplicationController
     private 
 
     def permit_params
-        params.require(:contact).permit(:application_id, :name, :email, :profile_url)
+        params.require(:contact).permit(:application_id, :first_name, :last_name, :suffix, :email, :profile_url)
     end
 end

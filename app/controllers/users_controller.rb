@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
-    before_action :logged_in?, only: [:dashboard, :show, :update]
+    before_action :logged_in?, only: [:show, :update]
+    # before_action :logged_in?, only: [:dashboard, :show, :update]
 
     def index # Temporary, delete once testing is done
         users = User.all
 
         render json: users
     end
+
+    def admin_query
+        user = User.find(params[:id])
+
+        render json: user
+    end
+    
 
     def login
         user = User.find_by(email: params[:email])
@@ -28,6 +36,13 @@ class UsersController < ApplicationController
             render json: {error: "Unable to create user", details: user.errors.full_messages}
         end
     end
+
+    def dashboard
+        # Return # of most recent application, # of highest priority businesses, # of contacts with recent conversations
+
+        render json: User.first.dashboard
+    end
+    
 
     def show
         render json: @user
