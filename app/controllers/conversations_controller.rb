@@ -15,7 +15,9 @@ class ConversationsController < ApplicationController
         conversation = Conversation.new(permit_params)
 
         if conversation.valid?
-            render json: conversation
+            conversations.save
+
+            render json: {message: "Successfully added conversation"}
         else
             render json: {error: "Unable to create conversation", details: conversation.errors.full_messages}
         end
@@ -27,7 +29,9 @@ class ConversationsController < ApplicationController
         conversation.assign_attributes(permit_params)
 
         if conversation.valid?
-            render json: conversation
+            conversations.save
+
+            render json: {message: "Successfully edited conversation"}
         else
             render json: {error: "Unable to update conversation", details: conversation.errors.full_messages}
         end
@@ -36,6 +40,8 @@ class ConversationsController < ApplicationController
     def destroy
         conversation = Conversation.find(params[:id])
         conversation.destroy
+
+        render json: {message: "Conversation deleted"}
     end
     
     private 

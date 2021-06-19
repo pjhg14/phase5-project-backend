@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   get "/users/admin/:id", to: "users#admin_query"
 
   # post "/applications/apply", to: "applications#apply"
-  get "/applications/userquery", to: "applications#query"
+  get "/applications/user/index", to: "applications#user_index"
 
-  get "/businesses/userquery", to: "businesses#query"
+  get "/businesses/user/index", to: "businesses#user_index"
 
-  get "/contacts/userquery", to: "contacts#query"
+  get "/contacts/user/index", to: "contacts#user_index"
 end

@@ -14,6 +14,9 @@ class ApplicationController < ActionController::API
             @user = nil 
         end
 
-        render json: {error: "Please login to access user data"} unless @user
+        render json: {
+            error: "Please login to access user data", 
+            details: "Something went wrong with login data, please login and try again"
+        } unless @user
     end
 end

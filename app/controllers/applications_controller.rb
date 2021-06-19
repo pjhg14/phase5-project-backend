@@ -1,22 +1,24 @@
 class ApplicationsController < ApplicationController
-    before_action :logged_in?, only: [:query]
+    before_action :logged_in?, only: [:user_index, :show, :create, :update, :destroy]
+    # before_action :logged_in?, only: [:show, :create, :update, :destroy]
 
-    def index
+    def index # testing purposes only
         # applications = Application.all
         applications = Application.includes(:user).all
 
         render json: applications
     end
 
-    def query
-        applications = @user.applications
+    def user_index
+        # applications = User.first.applications.includes(:user)
+        applications = @user.applications.includes(:user)
 
         render json: applications
     end
-    
 
     def show
-        application = Application.find(params[:id])
+        # application = Application.includes(:user).find(params[:id])
+        application = @user.applications.includes(:user).find(params[:id])
 
         render json: application
     end
@@ -33,22 +35,24 @@ class ApplicationsController < ApplicationController
         if params[:contact]
             # TODO
         end
-        
 
         if application.valid?
-            render json: application
+            application.save
+
+            render json: {message: "Successfully created application"}
         else
             render json: {error: "Unable to create application", details: application.errors.full_messages}
         end
     end
-    
 
     def update
         application = Application.find(params[:id])
         application.assign_attributes(permit_params)
 
         if application.valid?
-            render json: application
+            application.save
+
+            render json: {message: "Successfully updated application"}
         else
             render json: {error: "Unable to update application", details: application.errors.full_messages}
         end
@@ -58,8 +62,6 @@ class ApplicationsController < ApplicationController
         application = Application.find(params[:id])
         application.contacts.destroy_all
         application.destroy
-
-        contacts = Application.all.
 
         render json: {message: "Application and related contacts deleted"}
     end
@@ -71,7 +73,7 @@ class ApplicationsController < ApplicationController
     end
 
     def permit_business_params
-        params.require(:business).permit(:name, :address, :field, :description)
+        params.require(:business).permit(:user_id, :name, :address, :field, :description)
     end
     
     def permit_contact_params
