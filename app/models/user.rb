@@ -3,6 +3,9 @@ class User < ApplicationRecord
     
     has_many :applications
     has_many :businesses
+    has_many :experiences
+    has_many :projects
+    has_many :sites
 
     validates :username, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true

@@ -1,5 +1,5 @@
 class BusinessSerializer < ActiveModel::Serializer
-    attributes :id, :name, :address, :field, :description
+    attributes :id, :name, :address, :field, :motto, :about, :description
 
     has_many :applications, if: -> {include_applications?}
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_150451) do
+ActiveRecord::Schema.define(version: 2021_06_20_002008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2021_06_11_150451) do
   create_table "applications", force: :cascade do |t|
     t.integer "user_id"
     t.integer "business_id"
+    t.string "alias"
+    t.string "role"
     t.date "apply_date"
     t.date "start_date"
     t.string "wage_type"
@@ -51,8 +53,36 @@ ActiveRecord::Schema.define(version: 2021_06_11_150451) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer "contact_id"
+    t.string "author"
     t.string "content"
     t.date "contact_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.string "exp_type"
+    t.string "description"
+    t.date "completion_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.date "project_date"
+    t.boolean "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "domain"
+    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
