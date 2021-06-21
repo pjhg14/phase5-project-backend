@@ -27,7 +27,7 @@ class ContactsController < ApplicationController
         if contact.valid?
             contact.save
 
-            render json: {message: "Successfully created contact"}
+            render json: {message: "Successfully created contact", id: contact.id}
         else
             render json: {error: "Unable to create contact", details: contact.errors.full_messages}
         end
@@ -41,7 +41,7 @@ class ContactsController < ApplicationController
         if contact.valid?
             contact.save
 
-            render json: {message: "Successfully edited contact"}
+            render json: {message: "Successfully edited contact", id: contact.id}
         else
             render json: {error: "Unable to update contact", details: contact.errors.full_messages}
         end

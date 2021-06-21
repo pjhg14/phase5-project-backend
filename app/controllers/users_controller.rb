@@ -2,18 +2,17 @@ class UsersController < ApplicationController
     before_action :logged_in?, only: [:show, :update]
     # before_action :logged_in?, only: [:dashboard, :show, :update]
 
-    def index # Temporary, delete once testing is done
+    def index # TODO: delete once testing is done
         users = User.all
 
         render json: users
     end
 
-    def admin_query
+    def admin_query # TODO: delete once testing is done
         user = User.find(params[:id])
 
         render json: user
     end
-    
 
     def login
         user = User.find_by(email: params[:email])
@@ -38,8 +37,6 @@ class UsersController < ApplicationController
     end
 
     def dashboard
-        # Return # of most recent application, # of highest priority businesses, # of contacts with recent conversations
-
         render json: User.first.dashboard
     end
     

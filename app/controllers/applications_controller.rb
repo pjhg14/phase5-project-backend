@@ -3,7 +3,6 @@ class ApplicationsController < ApplicationController
     # before_action :logged_in?, only: [:show, :create, :update, :destroy]
 
     def index # testing purposes only
-        # applications = Application.all
         applications = Application.includes(:user).all
 
         render json: applications
@@ -39,7 +38,7 @@ class ApplicationsController < ApplicationController
         if application.valid?
             application.save
 
-            render json: {message: "Successfully created application"}
+            render json: {message: "Successfully created application", id: application.id}
         else
             render json: {error: "Unable to create application", details: application.errors.full_messages}
         end
@@ -52,7 +51,7 @@ class ApplicationsController < ApplicationController
         if application.valid?
             application.save
 
-            render json: {message: "Successfully updated application"}
+            render json: {message: "Successfully updated application", id: application.id}
         else
             render json: {error: "Unable to update application", details: application.errors.full_messages}
         end

@@ -17,6 +17,7 @@ class User < ApplicationRecord
     end
 
     def dashboard
+        # Return # of most recent application, # of highest priority businesses, # of contacts with recent conversations
         {
             applications: self.applications.first(5),
             businesses: self.businesses.first(5),

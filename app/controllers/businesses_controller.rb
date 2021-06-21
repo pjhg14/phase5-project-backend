@@ -1,8 +1,7 @@
 class BusinessesController < ApplicationController
     before_action :logged_in?, only: [:user_index, :show, :create, :update, :destroy]
 
-    def index # refactor later to only show all buisnesses related to currently logged in user
-        # businesses = Business.all
+    def index 
         businesses = Business.includes(:applications).all
 
         render json: businesses
@@ -25,7 +24,7 @@ class BusinessesController < ApplicationController
         if business.valid?
             business.save
 
-            render json: {message: "Successfully created business"}
+            render json: {message: "Successfully created business", id: business.id}
         else
             render json: {error: "Unable to create business", details: business.errors.full_messages}
         end
@@ -38,13 +37,13 @@ class BusinessesController < ApplicationController
         if business.valid?
             business.save
 
-            render json: {message: "Successfully edited business"}
+            render json: {message: "Successfully edited business", id: business.id}
         else
             render json: {error: "unable to update business", details: buisness.errors.full_messages}
         end
     end
     
-    def destroy # TODO: check if user is logged in before deleting
+    def destroy 
         business = Business.find(params[:id])
         business.applications.destroy_all
         business.destroy

@@ -17,7 +17,7 @@ class ConversationsController < ApplicationController
         if conversation.valid?
             conversations.save
 
-            render json: {message: "Successfully added conversation"}
+            render json: {message: "Successfully added conversation", id: conversation.id}
         else
             render json: {error: "Unable to create conversation", details: conversation.errors.full_messages}
         end
@@ -31,7 +31,7 @@ class ConversationsController < ApplicationController
         if conversation.valid?
             conversations.save
 
-            render json: {message: "Successfully edited conversation"}
+            render json: {message: "Successfully edited conversation", id: conversation.id}
         else
             render json: {error: "Unable to update conversation", details: conversation.errors.full_messages}
         end

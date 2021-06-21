@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  resources :projects
-  resources :sites
-  resources :experiences
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :users, only: [:show, :create, :update]
   resources :applications, only: [:show, :create, :update, :destroy]
   resources :businesses, only: [:show, :create, :update, :destroy]
   resources :contacts, only: [:show, :create, :update, :destroy]
   resources :conversations, only: [:show, :create, :update, :destroy]
+  resources :projects, only: [:create, :update, :destroy]
+  resources :sites, only: [:create, :update, :destroy]
+  resources :experiences, only: [:create, :update, :destroy]
 
   # model index routes (testing puropses only)
   get "/users", to: "users#index"
@@ -16,12 +16,10 @@ Rails.application.routes.draw do
   get "/contacts", to: "contacts#index"
   get "/conversations", to: "conversations#index"
 
-  # TODO: finish user routes, refactor fromntend lists to query for content instead of using a store
   post "/users/login", to: "users#login"
   get "/user/dashboard", to: "users#dashboard"
   get "/users/admin/:id", to: "users#admin_query"
 
-  # post "/applications/apply", to: "applications#apply"
   get "/applications/user/index", to: "applications#user_index"
 
   get "/businesses/user/index", to: "businesses#user_index"
