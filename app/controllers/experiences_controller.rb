@@ -36,6 +36,6 @@ class ExperiencesController < ApplicationController
     private
 
     def permit_params
-        params.require(:experiences).permit()
+        params.require(:experiences).permit(:user_id, :title, :exp_type, :description)
     end
 end

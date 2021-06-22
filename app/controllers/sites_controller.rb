@@ -36,6 +36,6 @@ class SitesController < ApplicationController
     private
 
     def permit_params
-        params.require(:site).permit()
+        params.require(:site).permit(:user_id, :domain, :url)
     end
 end
