@@ -45,6 +45,10 @@ class BusinessesController < ApplicationController
     
     def destroy 
         business = Business.find(params[:id])
+        business.applications.each do |application|
+            application.contacts.destroy_all
+        end
+        
         business.applications.destroy_all
         business.destroy
 
@@ -54,7 +58,7 @@ class BusinessesController < ApplicationController
     private 
 
     def permit_params
-        params.require(:business).permit(:user_id, :name, :address, :field, :description)
+        params.require(:business).permit(:user_id, :name, :address, :field, :motto, :priority, :description)
     end
     
 end

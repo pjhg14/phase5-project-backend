@@ -3,6 +3,7 @@ class ApplicationSerializer < ActiveModel::Serializer
     
     belongs_to :business, if: -> {include_businesses?}
     has_many :contacts
+    has_many :interviews
 
     def include_businesses?
         object.association(:user).loaded?

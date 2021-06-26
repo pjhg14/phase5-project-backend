@@ -101,6 +101,7 @@ puts "Creating Businesses..."
         address: Faker::Address.full_address,
         field: Faker::Company.industry,
         motto: Faker::Company.catch_phrase,
+        priority: rand(1..5),
         about: Faker::Lorem.sentence(word_count: 3, supplemental: false, random_words_to_add: 3),
         description: Faker::Lorem.paragraph(sentence_count: 5, supplemental: false, random_sentences_to_add: 5)
     )
@@ -140,7 +141,6 @@ User.all.each do |user|
     
 end
 
-
 puts "Creating Contacts and Conversations"
 10.times do
     first_name = Faker::Name.first_name
@@ -177,6 +177,25 @@ puts "Creating Contacts and Conversations"
         )
         convo_date = convo_date + rand(1..3).weeks
     end
+end
+
+20.times do
+    application = Application.all.sample
+
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    suffix = (rand(1..10).even? ? "" : Faker::Name.suffix)
+    iv_date = application.apply_date + rand(1..3).weeks
+
+    Interview.create(
+        application: application, 
+        interviewer: "#{first_name} #{last_name} #{suffix}",
+        iv_email: Faker::Internet.email(
+            name: "#{first_name.first} #{last_name}", 
+            separators: ""
+        ),
+        iv_date: iv_date
+    )
 end
 
 puts "Done!"

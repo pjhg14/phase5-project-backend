@@ -6,6 +6,7 @@ class CreateBusinesses < ActiveRecord::Migration[6.1]
       t.string :address
       t.string :field
       t.string :motto
+      t.integer :priority
       t.string :about
       t.string :description
 

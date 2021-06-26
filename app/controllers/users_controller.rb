@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-    before_action :logged_in?, only: [:show, :update]
-    # before_action :logged_in?, only: [:dashboard, :show, :update]
+    # before_action :logged_in?, only: [:show, :update]
+    before_action :logged_in?, only: [:dashboard, :show, :update]
 
     def index # TODO: delete once testing is done
         users = User.all
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     def login
         user = User.find_by(email: params[:email])
 
-        if !!user
+        if user && user.authenticate(params[:password])
             render json: {confirmation: "success!", token: generate_token({user_id: user.id})}
         else
             render json: {error: "Unable to login", details: ["User not found: Incorrect username or password"]}
@@ -37,10 +37,9 @@ class UsersController < ApplicationController
     end
 
     def dashboard
-        render json: User.first.dashboard
+        render json: @user.dashboard
     end
     
-
     def show
         render json: @user
     end

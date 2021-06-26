@@ -68,7 +68,7 @@ class ApplicationsController < ApplicationController
     private 
 
     def permit_params
-        params.require(:application).permit(:user_id, :business_id, :apply_date, :start_date, :wage_type, :wage)
+        params.require(:application).permit(:user_id, :business_id, :alias, :role, :apply_date, :start_date, :wage_type, :wage)
     end
 
     def permit_business_params

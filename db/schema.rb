@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_20_002008) do
+ActiveRecord::Schema.define(version: 2021_06_23_224829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2021_06_20_002008) do
     t.string "address"
     t.string "field"
     t.string "motto"
+    t.integer "priority"
     t.string "about"
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
@@ -66,6 +67,15 @@ ActiveRecord::Schema.define(version: 2021_06_20_002008) do
     t.string "exp_type"
     t.string "description"
     t.date "completion_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "interviews", force: :cascade do |t|
+    t.integer "application_id"
+    t.string "interviewer"
+    t.string "iv_email"
+    t.date "iv_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
