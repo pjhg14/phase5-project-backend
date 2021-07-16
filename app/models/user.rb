@@ -18,13 +18,11 @@ class User < ApplicationRecord
 
     def dashboard
         # Return # of most recent application, # of highest priority businesses, # of contacts with recent conversations
-        contacts = self.applications.map do |application|
-            application.contacts
-        end.flatten
+        contacts = self.applications.map {|application| application.contacts }.flatten
 
         {
             applications: self.applications.first(5),
-            businesses: self.businesses.first(5),
+            businesses: self.businesses.max_by(5) {|business| business.priority},
             contacts: contacts.first(5)
         }
     end

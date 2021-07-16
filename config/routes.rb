@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   post "/users/login", to: "users#login"
   get "/user/dashboard", to: "users#dashboard"
-  get "/users/admin/:id", to: "users#admin_query"
+  # get "/users/admin/:id", to: "users#admin_query"
 
   get "/applications/user/index", to: "applications#user_index"
 

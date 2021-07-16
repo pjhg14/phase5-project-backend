@@ -23,17 +23,19 @@ class ApplicationsController < ApplicationController
     end
 
     def create
-        application = Application.new(permit_params)
-
         # handle business creation with application
         if params[:business]
             # TODO
+            business = Business.create(permit_business_params)
         end
-
+        
         # handle contact creation with application
         if params[:contact]
             # TODO
+            contact = Contact.create(permit_contact_params)
         end
+
+        application = Application.new(permit_params.merge({ business: business }))
 
         if application.valid?
             application.save
